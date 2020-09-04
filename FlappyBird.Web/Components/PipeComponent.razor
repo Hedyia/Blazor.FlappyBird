@@ -1,0 +1,11 @@
+﻿<div class="pipe" style="@bottomPipeStyle"></div>
+<div class="pipe top-pipe" style="@topPipeStyle"></div>
+@code {
+    string bottomPipeStyle => $"left:{Pipe.DistanceFromLeft}px;" +
+                        $"bottom:{Pipe.DistanceFromBottom}px";
+
+    string topPipeStyle => $"left:{Pipe.DistanceFromLeft}px;" +
+                    $"bottom:{Pipe.DistanceFromTop}px";
+
+    [Parameter] public PipeModel Pipe { get; set; }
+}

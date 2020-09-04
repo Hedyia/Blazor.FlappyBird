@@ -1,0 +1,34 @@
+﻿<div tabindex="0" class="game-container" @onclick="@NewGame" @onkeypress="Jump">
+    <div class="points"><h3>@_gameManager.Points</h3></div>
+    <div class="sky">
+        <div class="bird" style="@birdStyle"></div>
+    </div>
+    <div class="ground">
+        </div>
+    @foreach (var pipe in _gameManager.Pipes)
+    {
+        <PipeComponent Pipe="pipe"/>
+    }
+</div>
+
+@code { 
+    GameManager _gameManager;
+    string birdStyle => $"bottom:{_gameManager.Bird.DistanceFromGround}px";
+    protected override void OnInitialized()
+    {
+        _gameManager = new GameManager();
+        _gameManager.OnLoopCompleted += (e,s) => StateHasChanged();
+        base.OnInitialized();
+    }
+
+    private void NewGame()
+    {
+        _gameManager.NewGame();
+    }
+    private void Jump(KeyboardEventArgs e)
+    {
+        if (e.Key == " ")
+            _gameManager.Jump();
+    }
+
+}
